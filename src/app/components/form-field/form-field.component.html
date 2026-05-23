@@ -1,0 +1,28 @@
+<div [formGroup]="form()">
+  @if (config().type === 'text') {
+    <label [for]="config().controlName">
+      {{ config().label }}
+    </label>
+    <input
+      [id]="config().controlName"
+      type="text"
+      class="form-control"
+      [formControlName]="config().controlName"
+    />
+  }
+
+  @if (config().type === 'select') {
+    <label [for]="config().controlName">
+      {{ config().label }}
+    </label>
+    <select
+      [id]="config().controlName"
+      class="form-select"
+      [formControlName]="config().controlName"
+    >
+      @for (option of getOptions(config()); track option.value) {
+        <option [value]="option.value">{{ option.label }}</option>
+      }
+    </select>
+  }
+</div>

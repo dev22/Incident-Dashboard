@@ -1,0 +1,35 @@
+@use "../../../assets/scss/variables" as *;
+
+.filter-bar {
+  background: $color-bg-card;
+  border-bottom: 1px solid $color-border-light;
+  backdrop-filter: blur(8px);
+  padding: $spacing-2xl $spacing-4xl;
+}
+
+.selects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-lg;
+  align-items: center;
+
+  app-form-field {
+    flex: 1;
+    min-width: 150px;
+  }
+}
+
+.reset-btn {
+  padding: $spacing-lg $spacing-3xl;
+  background: rgba($color-severity-critical, 0.1);
+  border: 1px solid rgba($color-severity-critical, 0.25);
+  border-radius: $radius-lg;
+  color: $color-severity-critical;
+  font-size: $font-size-md;
+  cursor: pointer;
+  font-family: $font-family-mono;
+  transition: background $transition-base;
+  &:hover {
+    background: rgba($color-severity-critical, 0.18);
+  }
+}

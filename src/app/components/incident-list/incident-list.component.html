@@ -1,0 +1,59 @@
+<div class="row mt-4">
+  @if (incidentStore.loading()) {
+    <div class="state-overlay">
+      <div class="spinner-wrap">
+        <div class="spinner"></div>
+        <p class="state-text">Loading incidents…</p>
+      </div>
+    </div>
+  } @else if (incidentStore.error()) {
+    <div class="state-overlay">
+      <div class="error-wrap">
+        <div class="error-icon">⚠</div>
+        <p class="state-text error-text">{{ incidentStore.error() }}</p>
+        <button class="retry-btn" (click)="incidentStore.loadIncidents(true)">
+          Retry
+        </button>
+      </div>
+    </div>
+  } @else if (incidentStore.filteredIncidents().length === 0) {
+    <div class="state-overlay">
+      <div class="empty-wrap">
+        <div class="empty-icon"><i class="bi bi-columns-gap"></i></div>
+        <p class="state-text">No incidents match your filters.</p>
+      </div>
+    </div>
+  } @else {
+    <div class="incident-grid">
+      @for (inc of incidentStore.filteredIncidents(); track inc.id) {
+        <div
+          class="incident-card"
+          role="button"
+          tabindex="0"
+          [class.selected]="incidentStore.selectedIncidentId() === inc.id"
+          [class.sev-critical]="inc.severity === 'critical'"
+          (click)="selectIncident(inc.id)"
+          (keydown.enter)="selectIncident(inc.id, $event)"
+          (keydown.space)="selectIncident(inc.id, $event)"
+        >
+          <div class="card-header">
+            <span class="inc-id">{{ inc.id }}</span>
+            <div class="badges">
+              <span class="sev" [ngClass]="'sev-' + inc.severity">{{
+                inc.severity
+              }}</span>
+              <span class="badge" [ngClass]="'status-' + inc.status">
+                {{ inc.status | titlecase }}
+              </span>
+            </div>
+          </div>
+          <h3 class="inc-title">{{ inc.title }}</h3>
+          <div class="inc-meta">
+            <span class="service-tag">{{ inc.service }}</span>
+            <span class="assignee">{{ inc.assignee }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

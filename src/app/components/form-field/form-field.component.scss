@@ -1,0 +1,49 @@
+@use "../../../assets/scss/variables" as *;
+
+label {
+  display: block;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-tertiary;
+  margin-bottom: $spacing-md;
+  font-family: $font-family-mono;
+}
+
+.form-control,
+.form-select {
+  width: 100%;
+  padding: $spacing-lg $spacing-2xl;
+  background: $color-border-input;
+  border: 1px solid $color-primary-lighter;
+  border-radius: $radius-lg;
+  color: $color-text-tertiary;
+  font-size: $font-size-md;
+  font-family: $font-family-mono;
+  outline: none;
+  cursor: pointer;
+  transition: border-color $transition-base;
+}
+
+input.form-control {
+  cursor: text;
+  appearance: none;
+}
+
+.form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 28px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23475569'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+input.form-control:focus,
+.form-select:focus {
+  border-color: rgba($color-primary, 0.5);
+}
+
+.form-select option {
+  background: #1e293b;
+  color: $color-text-tertiary;
+}

@@ -1,59 +1,55 @@
-# IncidentsManager
+## Approach section documents:
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.26.
+I tried to keep the application structure simple and component-driven.
 
-## Development server
+The app is divided into small reusable components:
 
-To start a local development server, run:
+- FilterBarComponent
+- IncidentListComponent
+- IncidentDetailComponent
+- FormFieldComponent
 
-```bash
-ng serve
-```
+The business logic and application state are centralized inside IncidentService.
+Instead of passing data between multiple components manually, I used Angular Signals to manage state reactively.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The service handles:
 
-## Code scaffolding
+- incidents data
+- filters
+- loading state
+- error state
+- selected incident
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Filtering works like this:
 
-```bash
-ng generate component component-name
-```
+1. The user updates the typed reactive form in `FilterBarComponent`.
+2. Form changes are pushed into `IncidentService`.
+3. Computed signals recalculate filtered incidents and available UI state.
+4. Angular updates the list view automatically.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The filter form is also kept in sync with store state, so resets and future state syncing patterns are easier to support.
 
-```bash
-ng generate --help
-```
+This avoids unnecessary subscriptions and keeps the data flow predictable.
+I also focused on keeping the CSS maintainable by using SCSS variables for colors, spacing, and reusable styling values, which makes the UI easier to scale and update consistently across the application.
 
-## Building
+## What I'd improve next
 
-To build the project run:
+These are the improvements I would make next:
 
-```bash
-ng build
-```
+- Replace the mock data source with real API integration through `HttpClient`
+- Add dedicated unit tests for `IncidentService`
+- Add interaction tests for filtering, retry, selection, and status updates
+- Sync filters with URL query params so views are shareable
+- Add debounce and distinct filtering for search input
+- Improve accessibility with better ARIA labels, focus states, and keyboard support
+- Add summary cards or analytics driven from derived incident state
+- Improve mobile behavior for the split list/detail layout
+- Add pagination, infinite scrolling, or virtual scrolling for larger datasets
+- Introduce reusable SCSS mixins and layout utilities where repetition starts to grow
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Testing strategy covers:
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Full IncidentService unit test suite with fakeAsync/tick for the setTimeout mock
+- FormFieldComponent isolated tests
+- FilterBarComponent interaction tests (spy on svc.setFilters)
+- IncidentListComponent tests for all 4 template states (loading/error/empty/data)

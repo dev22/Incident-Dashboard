@@ -1,0 +1,165 @@
+@use "../../../assets/scss/variables" as *;
+
+.state-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+}
+.spinner-wrap,
+.error-wrap,
+.empty-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-4xl;
+}
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba($color-primary, 0.2);
+  border-top-color: $color-primary;
+  border-radius: $radius-full;
+  animation: spin $animation-duration-spin linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.state-text {
+  color: $color-text-tertiary;
+  font-size: $font-size-lg;
+  font-family: $font-family-mono;
+  margin: 0;
+}
+.error-icon,
+.empty-icon {
+  font-size: $font-size-5xl;
+  line-height: 1;
+}
+.error-icon {
+  color: $color-severity-critical;
+}
+.empty-icon {
+  color: $color-text-muted;
+  font-size: $font-size-6xl;
+}
+.error-text {
+  color: $color-severity-critical;
+}
+.retry-btn {
+  padding: $spacing-lg $spacing-5xl;
+  background: rgba($color-primary, 0.12);
+  border: 1px solid rgba($color-primary, 0.3);
+  border-radius: $radius-lg;
+  color: $color-primary-light;
+  font-size: $font-size-md;
+  cursor: pointer;
+  font-family: $font-family-mono;
+  transition: background $transition-base;
+  &:hover {
+    background: rgba($color-primary, 0.22);
+  }
+}
+.incident-grid {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+.incident-card {
+  background: $color-bg-card;
+  border: 1px solid $color-border-light;
+  border-radius: $radius-xl;
+  padding: $spacing-4xl $spacing-5xl;
+  cursor: pointer;
+  transition:
+    border-color $transition-base,
+    background $transition-base,
+    transform $transition-fast;
+  position: relative;
+  overflow: hidden;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: transparent;
+    transition: background $transition-base;
+  }
+  &:hover {
+    background: $color-bg-hover;
+    border-color: rgba($color-primary, 0.2);
+    transform: translateX(2px);
+    &::before {
+      background: rgba($color-primary, 0.4);
+    }
+  }
+  &.selected {
+    background: $color-bg-selected;
+    border-color: rgba($color-primary, 0.35);
+    &::before {
+      background: $color-primary;
+    }
+  }
+  &.sev-critical::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(
+      circle at top right,
+      $color-severity-critical-light,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-lg;
+}
+.inc-id {
+  font-family: $font-family-mono;
+  font-size: $font-size-base;
+  color: $color-text-muted;
+  letter-spacing: $letter-spacing-base;
+}
+.badges {
+  display: flex;
+  gap: $spacing-md;
+  align-items: center;
+}
+.inc-title {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-medium;
+  color: #b66dff;
+  margin: 0 0 10px;
+  font-family: $font-family-primary;
+  line-height: 1.4;
+}
+.inc-meta {
+  display: flex;
+  gap: $spacing-xl;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.service-tag {
+  font-size: $font-size-base;
+  padding: $spacing-xs $spacing-lg;
+  background: rgba($color-primary, 0.1);
+  border-radius: $radius-sm;
+  color: $color-primary-light;
+  font-family: $font-family-mono;
+}
+.assignee {
+  font-size: $font-size-md;
+  color: $color-text-tertiary;
+  font-family: $font-family-mono;
+}

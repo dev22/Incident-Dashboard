@@ -1,0 +1,20 @@
+.navbar {
+  background: #fff;
+  .navbar-brand-wrapper {
+    width: 300px;
+    height: 70px;
+    .navbar-brand {
+      color: #b66dff;
+      font-size: 1.5rem;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+  .navbar-menu-wrapper {
+    color: #b66dff;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: calc(100% - 300px);
+    height: 70px;
+  }
+}

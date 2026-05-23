@@ -1,0 +1,19 @@
+<div class="row dashboard-page">
+  <div class="col">
+    <div class="page-header">
+      <app-filter-bar />
+    </div>
+
+    <div class="content-area">
+      <div class="list-col">
+        <app-incident-list />
+      </div>
+
+      @if (incidentStore.selectedIncidentId()) {
+        <aside class="detail-col">
+          <app-incident-detail />
+        </aside>
+      }
+    </div>
+  </div>
+</div>

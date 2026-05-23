@@ -1,0 +1,56 @@
+@if (incidentStore.selectedIncident(); as inc) {
+  <div class="detail-panel mt-4 ms-3">
+    <div class="detail-header">
+      <div class="header-top">
+        <span class="inc-id-lg">{{ inc.id }}</span>
+        <button class="close-btn" (click)="closeDetailPanel()">✕</button>
+      </div>
+      <h2 class="detail-title">{{ inc.title }}</h2>
+      <div class="header-badges">
+        <span class="sev" [ngClass]="'sev-' + inc.severity">{{
+          inc.severity
+        }}</span>
+        <span class="badge" [ngClass]="'status-' + inc.status">
+          {{ inc.status | titlecase }}
+        </span>
+        <span class="service-chip">{{ inc.service }}</span>
+      </div>
+    </div>
+    <div class="detail-body">
+      <section class="detail-section">
+        <h4 class="section-label">Description</h4>
+        <p class="description-text">{{ inc.description }}</p>
+      </section>
+      <section class="detail-section">
+        <h4 class="section-label">Details</h4>
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span class="meta-key">Assignee</span>
+            <span class="meta-val">{{ inc.assignee }}</span>
+          </div>
+        </div>
+      </section>
+      <section class="detail-section">
+        <h4 class="section-label">Update Status</h4>
+        <div class="status-actions">
+          @for (s of statuses; track s.value) {
+            <button
+              class="status-btn"
+              [class.active]="inc.status === s.value"
+              [attr.data-status]="s.value"
+              [disabled]="inc.status === s.value"
+              (click)="updateIncidentStatus(inc.id, s.value)"
+            >
+              {{ s.label }}
+            </button>
+          }
+        </div>
+      </section>
+    </div>
+  </div>
+} @else {
+  <div class="no-selection">
+    <div class="no-sel-icon">⊙</div>
+    <p>Select an incident to view details</p>
+  </div>
+}

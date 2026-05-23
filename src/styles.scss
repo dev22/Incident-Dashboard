@@ -1,1 +1,132 @@
-/* You can add global styles to this file, and also import other style files */
+@use "variables" as *;
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: $font-family-primary;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: $spacing-md;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xl;
+}
+.page-title h1 {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  margin: 0;
+  font-family: $font-family-primary;
+}
+.content-area {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 0;
+}
+.list-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+.detail-col {
+  width: 380px;
+  flex-shrink: 0;
+  background: $color-white;
+  overflow: hidden;
+  animation: slidePanel 0.2s ease;
+}
+@keyframes slidePanel {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.sev {
+  display: inline-block;
+  padding: $spacing-xs $spacing-xl;
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-medium;
+  text-transform: uppercase;
+  font-family: $font-family-mono;
+}
+.sev-critical {
+  background: $color-severity-critical-bg;
+  color: $color-severity-critical;
+  border: 1px solid $color-severity-critical-border;
+}
+.sev-high {
+  background: $color-severity-high-bg;
+  color: $color-severity-high;
+  border: 1px solid $color-severity-high-border;
+}
+.sev-medium {
+  background: $color-severity-medium-bg;
+  color: $color-severity-medium;
+  border: 1px solid $color-severity-medium-border;
+}
+.sev-low {
+  background: $color-severity-low-bg;
+  color: $color-severity-low;
+  border: 1px solid $color-severity-low-border;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-xs $spacing-xl;
+  border-radius: 20px;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-base;
+  text-transform: uppercase;
+  font-family: $font-family-mono;
+}
+.status-open {
+  background: $color-status-open-bg;
+  color: $color-status-open;
+}
+.status-investigating {
+  background: $color-status-investigating-bg;
+  color: $color-status-investigating;
+}
+.status-resolved {
+  background: $color-status-resolved-bg;
+  color: $color-status-resolved;
+}
+.status-closed {
+  background: $color-status-closed-bg;
+  color: $color-status-closed;
+}
